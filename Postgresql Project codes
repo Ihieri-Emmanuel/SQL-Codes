@@ -1,0 +1,66 @@
+--Quantum Analytics Assignment on PostgreSQL
+--Done by; IHIERI CHIGOZIE EMMANUEL
+--PHONE NUMBER; 08147575095
+
+--1. How many paymenttransactions were greater than $5.00?
+--2. How many actors have a first name thatstarts with the letter P?
+--3. How many unique districts are our customers from?
+--4. Retrieve the list of names for those distinct districts from the previous question.
+--5. How many films have the word Truman somewhere in the title?
+--6. Create a table to organize our potential leads! We will have the following information:
+--A customer's first name, last name, email,sign-up date, and number of minutes spent on the dvd
+--rental site. You should also have some sort of id tracker for them. You have free reign on how you
+--wantto create this table.
+
+
+--1. How many payment transactions were greater than $5.00?
+
+Select count(amount) from payment
+where amount > 5.00;
+
+--2. How many actors have a first name that starts with the letter P?
+
+Select count(first_name) from actor
+where (first_name) ilike 'P%';
+
+--Answer is 5.
+
+--3. How many unique districts are our customers from?
+
+select count (distinct district) from address;
+
+--Answer is 378.
+
+--4. Retrieve the list of names for those distinct districts from the previous question.
+
+select distinct district from address;
+
+--5. How many films have the word Truman somewhere in the title?
+
+Select count(title) from film
+where title ilike '%Truman%'
+
+--Answer is 5.
+
+--6. Create a table to organize our potential leads! We will have the following information:
+--A customer's first name, last name, email,sign-up date, and number of minutes spent on the dvd
+--rental site. You should also have some sort of id tracker for them. You have free reign on how you
+--wantto create this table.
+
+Create Table Potential_Leads (
+		Customer_id INT Primary key,
+		First_name Varchar not null,
+		Last_name Varchar not null,
+		Email varchar unique not null,
+		Sign_up_date varchar not null,
+		Number_of_Minutes_spent_on_Rental_site INT not null);
+
+Select * from potential_leads;
+
+Insert into potential_leads (Customer_id, First_name, Last_name, Email, Sign_up_date, number_of_minutes_spent_on_Rental_site)
+Values
+		('001', 'James', 'Jackson', 'JJwise@gmail.com', '12/07/2021','40'),
+		('002', 'Maria', 'Simon', 'marias@gmail.com', '23/03/2022', '120');
+
+Select * from potential_leads;
+--Fill in the rest of the data directly on the table
